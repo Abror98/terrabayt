@@ -7,18 +7,26 @@ abstract class InfoState extends Equatable{
   List<Object> get props => [];
 }
 
-class InfoLoading extends InfoState {}
+class InfoLoadingState extends InfoState {}
 
-
-class InfoLoaded extends InfoState{
+class BottomLoadingState extends InfoState{
   final List<NewsModel> list;
-  InfoLoaded({this.list});
+  BottomLoadingState({this.list});
   @override
   // TODO: implement props
   List<Object> get props => [list];
 }
 
-class InfoListError extends InfoState{
+
+class InfoLoadedState extends InfoState{
+  final List<NewsModel> list;
+  InfoLoadedState({this.list});
+  @override
+  // TODO: implement props
+  List<Object> get props => [list];
+}
+
+class InfoListErrorState extends InfoState{
   final error;
-  InfoListError({this.error});
+  InfoListErrorState({this.error});
 }
