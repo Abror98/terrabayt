@@ -2,15 +2,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:terrabayt/bloc/info_bloc.dart';
 import 'package:terrabayt/model/info_model.dart';
+import 'package:terrabayt/screens/content_screen.dart';
 
 class ListViewBuilder extends StatelessWidget {
   final ScrollController controller;
   final List<NewsModel> list;
-  final Function (int index) onItemPress;
 
 
-  ListViewBuilder({this.controller, this.list, this.onItemPress});
+  ListViewBuilder({this.controller, this.list});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,10 @@ class ListViewBuilder extends StatelessWidget {
                   ),
                   MaterialButton(
                     padding: EdgeInsets.all(4),
-                    onPressed: () => onItemPress(i),
+                    onPressed: (){
+                      //infoBloc == null ? null : () => infoBloc.add(EventItemPressed(index: i)),
+                      Navigator.push(context, ContentScreen.route(postModel: list[i]));
+                    },
                     child: Container(
                       color: Colors.black.withOpacity(0.3),
                       height: 250,
@@ -56,7 +60,10 @@ class ListViewBuilder extends StatelessWidget {
         return Card(
           child: MaterialButton(
             padding: EdgeInsets.all(5),
-            onPressed: onItemPress == null ? null : () => onItemPress(i),
+            onPressed: (){
+              Navigator.push(context, ContentScreen.route(postModel: list[i]));
+              //infoBloc == null ? null : () => infoBloc.add(EventItemPressed(index: i))
+              },
             child: SizedBox(
               height: 120,
               child: Row(

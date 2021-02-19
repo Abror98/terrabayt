@@ -6,10 +6,15 @@ import 'package:terrabayt/widgets/bottom_widget.dart';
 import 'package:terrabayt/widgets/drawer.dart';
 import 'package:terrabayt/widgets/listview_builder.dart';
 
-class BaseScreen extends StatefulWidget {
-  static Widget screen() => BlocProvider(
+class BaseScreen extends StatefulWidget{
+  int category;
+  BaseScreen(int category){
+    this.category = category;
+  }
+
+  static Widget screen(int category) => BlocProvider(
         create: (context) => InfoBloc(context),
-        child: BaseScreen(),
+        child: BaseScreen(category),
       );
 
   @override
@@ -23,7 +28,7 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   void initState() {
     bloc = BlocProvider.of<InfoBloc>(context);
-    bloc.add(InfoEvent(category: 0, limit: 30));
+    bloc.add(InfoEvent(category: widget.category, limit: 30));
     _scrollController.addListener(() => onScroll());
     super.initState();
   }
@@ -37,7 +42,7 @@ class _BaseScreenState extends State<BaseScreen> {
       bloc.add(NextEvent(
         firstUpdate: bloc.list[bloc.list.length - 1].publishedAt,
         lastUpdate: 0,
-        category: 0,
+        category: widget.category,
         limit: 30,
       ));
     }
@@ -54,14 +59,11 @@ class _BaseScreenState extends State<BaseScreen> {
     return Scaffold(
       bottomSheet: BlocBuilder<InfoBloc, InfoState>(builder: (context, state) {
         if (state is BottomLoadingState) {
-          print("ok");
           return BottomLoading();
         }
         return SizedBox();
       }),
-      appBar: AppBar(title: Text("Terabayt")),
       body: bodyWidget(),
-      drawer: CustomDrawer(),
     );
   }
 

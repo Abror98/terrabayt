@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:terrabayt/model/info_model.dart';
 import 'package:terrabayt/net/network_error/internet_error.dart';
 import 'package:terrabayt/net/repository/repository.dart';
+import 'package:terrabayt/screens/content_screen.dart';
 
 part 'info_event.dart';
 
@@ -74,4 +75,9 @@ class InfoBloc extends Bloc<MainEvent, InfoState> {
       yield InfoListErrorState(error: UnknownException('Unknown error'));
     }
   }
+
+  Stream<InfoState> ItemPress(EventItemPressed event){
+    Navigator.push(context, ContentScreen.route(postModel: list[event.index]));
+  }
 }
+

@@ -1,11 +1,24 @@
 part of 'info_bloc.dart';
 
 @immutable
-abstract class MainEvent {}
+abstract class MainEvent extends Equatable{
+
+  @override
+  List<Object> get props => [];
+}
 
 class InfoEvent extends MainEvent{
    final int category, limit;
    InfoEvent({this.category, this.limit});
+}
+
+class EventItemPressed extends MainEvent{
+   final int index;
+
+   EventItemPressed({this.index});
+
+   @override
+  List<Object> get props => [index];
 }
 
 class NextEvent extends MainEvent{
