@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:terrabayt/consts/consts.dart';
 import 'package:terrabayt/screens/base_screen.dart';
-import 'package:terrabayt/screens/okscreeen.dart';
 import 'package:terrabayt/widgets/drawer.dart';
 void main() {
   runApp(MyApp());
@@ -55,7 +54,6 @@ class _MainScreenState extends State<MainScreen> {
         return BaseScreen.screen(1205);
       case 4:
         return BaseScreen.screen(97);
-      default: OkScreen();
     }
   }
 
